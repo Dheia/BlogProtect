@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Setting
+
+# Model Form Field configuration
+form: $/kurtjensen/blogprotect/models/setting/fields.yaml
+
+# Model Class name
+modelClass: KurtJensen\BlogProtect\Models\Setting
+
+# Default redirect location
+defaultRedirect: kurtjensen/blogprotect/settings
+
+# Create page
+create:
+    title: Create Setting
+    redirect: kurtjensen/blogprotect/settings/update/:id
+    redirectClose: kurtjensen/blogprotect/settings
+
+# Update page
+update:
+    title: Edit Setting
+    redirect: kurtjensen/blogprotect/settings
+    redirectClose: kurtjensen/blogprotect/settings
+
+# Preview page
+preview:
+    title: Preview Setting

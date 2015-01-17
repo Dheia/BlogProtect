@@ -1,0 +1,19 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    public_perm:
+        label: Public Category
+        comment: A permission for categories that will NOT be blocked from public viewing.
+        type: dropdown
+        
+    deny_perm:
+        label: Denied Category
+        comment: A permission for categories that WILL be blocked from any viewing.
+        type: dropdown
+        
+    default_perm:
+        label: Default Category
+        comment: A permission that will be set on new categories by default ( unless set by user ).
+        type: dropdown

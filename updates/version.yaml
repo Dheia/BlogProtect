@@ -1,0 +1,5 @@
+1.0.1: First version of BlogProtect
+1.0.2:
+    - Seed Tables
+    - blog_add_permission_column.php
+    - seed_all_tables.php

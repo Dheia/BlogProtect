@@ -54,8 +54,6 @@ class ProtectedPost extends Post
         $slug = $this->property('slug');
         // $approvedCats = Category::whereIn('permission_id', )->lists('id');
         $permissions = $this->loadPermissions();
-        
-        $this->page['hint'] .= 'Perms '.implode(',',$permissions);
 
         $post = BlogPost::whereHas('categories', 
                     function($q) use ($permissions) { 

@@ -74,7 +74,6 @@ class ProtectedPosts extends Posts
     {
         $this->prepareVars();
 
-        $this->page['hint'] =''; 
         $this->category = $this->page['category'] = $this->loadCategory();
         $this->posts = $this->page['posts'] = $this->listPosts();
 
@@ -93,7 +92,6 @@ class ProtectedPosts extends Posts
     protected function listPosts()
     {
         if(!$this->category) {
-            $this->page['hint'] .= ' listPosts() returning null -';
             return null;
         }
         $categories = $this->category->id;

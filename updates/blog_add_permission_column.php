@@ -14,9 +14,9 @@ class BlogAddPermissionColumn extends Migration
         });
 
         /*
-         * Set login for existing users
+         * Set permission for existing categories
          */
-        $categories = User::all();
+        $categories = Category::all();
         foreach ($categories as $category) {
             $category->permission_id = 0;
             $category->save();

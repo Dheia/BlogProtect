@@ -94,7 +94,7 @@ class ProtectedPosts extends Posts
         if(!$this->category) {
             return null;
         }
-        $categories = $this->category->id;
+        //$categories = $this->category;
 
         /*
          * List all the posts, eager load their categories
@@ -103,7 +103,7 @@ class ProtectedPosts extends Posts
             'page'       => $this->property('pageNumber'),
             'sort'       => $this->property('sortOrder'),
             'perPage'    => $this->property('postsPerPage'),
-            'categories' => $categories
+            'categories' => $this->category
         ]);
 
         /*
@@ -125,11 +125,11 @@ class ProtectedPosts extends Posts
         $permissions = $this->loadPermissions();
         if (!$categoryId = $this->property('categoryFilter'))
         {
-            $category = BlogCategory::whereIn('permission_id', $permissions)->get();
+            $category = BlogCategory::whereIn('permission_id', $permissions)->lists('id');
         }
         else
         {
-            if (!$category = BlogCategory::whereIn('permission_id', $permissions)->whereSlug($categoryId)->first())
+            if (!$category = BlogCategory::whereIn('permission_id', $permissions)->whereSlug($categoryId)->lists('id'))
                 return null;
         }
 

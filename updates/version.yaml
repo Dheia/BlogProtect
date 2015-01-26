@@ -3,3 +3,5 @@
     - Seed Tables
     - blog_add_permission_column.php
     - seed_all_tables.php
+1.0.3:
+    - Fixed Error when user has no permisions

@@ -94,7 +94,6 @@ class ProtectedPosts extends Posts
         if(!$this->category) {
             return null;
         }
-        //$categories = $this->category;
 
         /*
          * List all the posts, eager load their categories

@@ -34,6 +34,8 @@ trait LoadPermissions
                 }
                 
             }
+        
+        if (!count($this->permarray)) $this->permarray = [0];
         asort($this->permarray);
         return $this->permarray;
         }

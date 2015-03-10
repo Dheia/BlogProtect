@@ -31,7 +31,7 @@ class Settings extends Model
      */
     public $belongsTo = [
         'permission' =>       ['ShahiemSeymor\Roles\Models\UserPermission', 
-                        'parentKey'=>'id'],
+                        'otherKey'=>'id'],
         ];
 
 

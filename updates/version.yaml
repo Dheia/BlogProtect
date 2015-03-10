@@ -5,3 +5,5 @@
     - seed_all_tables.php
 1.0.3:
     - Fixed Error when user has no permisions
+1.0.4:
+    - Updated to be RC compatible

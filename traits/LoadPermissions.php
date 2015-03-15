@@ -13,32 +13,30 @@ trait LoadPermissions
      * @var array Permissions array for current user
      */
     public $permarray = [];
-    
+
     public function loadPermissions()
     {
         if (count($this->permarray)) return $this->permarray;
         
-        $account = new Account;
+        $User = Auth::getUser();
         
         $deny_perm = intval( Settings::get('deny_perm'));
 
-        if(Auth::check())
+        if ( $User )
         {
-            $roles = json_decode(User::find($account->user()->id)->groups);
-            foreach($roles as $role)
-            {
-                foreach(UserGroup::find($role->id)->perms as $perm)
-                {
-                    if ($perm->id != $deny_perm)
-                        $this->permarray[$perm->id]=$perm->id;
-                }
-                
-            }
-        
-        if (!count($this->permarray)) $this->permarray = [0];
-        asort($this->permarray);
-        return $this->permarray;
-        }
+            $roles = DB::table('shahiemseymor_assigned_roles')->
+                        where('user_id','=',$User->id)->lists('role_id');
+            
+            $this->permarray = DB::table('shahiemseymor_permission_role')->
+                    wherein('role_id', $roles)->
+                    where('permission_id','<>', $deny_perm)->
+                    lists('permission_id');
+
+            if (!count($this->permarray)) $this->permarray = [0];
+            
+            $this->permarray = array_unique($this->permarray);
+            return $this->permarray;
+         }
         else
         $this->permarray = [Settings::get('public_perm')];
         return $this->permarray;

@@ -52,7 +52,7 @@ class ProtectedPost extends Post
     protected function loadPost()
     {
         $slug = $this->property('slug');
-        // $approvedCats = Category::whereIn('permission_id', )->lists('id');
+        
         $permissions = $this->loadPermissions();
 
         $post = BlogPost::whereHas('categories', 

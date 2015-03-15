@@ -7,3 +7,6 @@
     - Fixed Error when user has no permisions
 1.0.4:
     - Updated to be RC compatible
+1.0.5:
+    - Fixed Error in View related to pagination
+    - Increased efficiency of permission queries

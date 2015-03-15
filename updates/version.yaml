@@ -10,3 +10,5 @@
 1.0.5:
     - Fixed Error in View related to pagination
     - Increased efficiency of permission queries
+1.0.6:
+    - Added DB class for new permission queries

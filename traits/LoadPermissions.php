@@ -1,5 +1,6 @@
 <?php namespace KurtJensen\BlogProtect\Traits;
 
+use DB;
 use Auth;
 use RainLab\User\Components\Account;
 use RainLab\User\Models\User as User;

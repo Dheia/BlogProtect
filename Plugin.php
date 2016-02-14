@@ -29,8 +29,12 @@ class Plugin extends PluginBase
             'description' => 'Restrict RainLab Blog Post viewers by category permission',
             'author' => 'KurtJensen',
             'icon' => 'icon-lock',
-            'message_url' => 'http://firemankurt.com/notices/',
         ];
+    }
+
+    public function messageURL()
+    {
+        return 'http://firemankurt.com/notices/';
     }
 
     public function registerSettings()

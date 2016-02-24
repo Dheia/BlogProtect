@@ -37,6 +37,13 @@ class Plugin extends PluginBase
         return 'http://firemankurt.com/notices/';
     }
 
+    public function registerPermissions()
+    {
+        return [
+            'kurtjensen.blogprotect.settings' => ['label' => 'Blog Protect Settings', 'tab' => 'Blog'],
+        ];
+    }
+
     public function registerSettings()
     {
         return [
@@ -46,6 +53,7 @@ class Plugin extends PluginBase
                 'description' => 'Configure blog category protection.',
                 'class' => 'KurtJensen\BlogProtect\Models\Settings',
                 'order' => 199,
+                'permissions' => ['kurtjensen.blogprotect.settings'],
             ],
         ];
 

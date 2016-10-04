@@ -15,3 +15,4 @@
 1.0.7: !!! This is an important update that contains breaking changes. BlogProtect will now be using Passage Permission Keys for permissions and you will need to install the plugin using code "kurtjensen.passage". If you do not install Passage Permission Keys plugin then your protected posts may not show or may be visible to anyone who visits your site until you do add PassagePermission Keys plugin. This update also removed "deny_perm" from settings and querys as it was difficult to use correctly and had little use.
 1.0.8: Added messageURL() to enable Author Notices
 1.0.9: Added Backend Settings Permissions
+1.0.10: Updated to changes made in Passage Permission Plugin

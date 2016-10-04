@@ -28,10 +28,10 @@ class ProtectedPosts extends Posts
         $posts = Post::whereHas('categories',
             function ($q) {
                 $q->whereIn('permission_id', $this->permarray)->
-                where('permission_id', '!=', Settings::get('deny_perm'));
+                    where('permission_id', '!=', Settings::get('deny_perm'));
             })->
-        with('categories')->
-        listFrontEnd([
+            with('categories')->
+            listFrontEnd([
             'page' => $this->property('pageNumber'),
             'sort' => $this->property('sortOrder'),
             'perPage' => $this->property('postsPerPage'),
@@ -55,7 +55,7 @@ class ProtectedPosts extends Posts
     protected function loadCategory()
     {
 
-        $akeys = array_keys(\KurtJensen\Passage\Plugin::globalPassageKeys());
+        $akeys = array_keys(\KurtJensen\Passage\Plugin::passageKeys());
         $this->permarray = array_merge($akeys, [Settings::get('public_perm')]);
 
         //$category = parent::loadCategory();

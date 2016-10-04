@@ -19,7 +19,7 @@ class ProtectedCategories extends Categories
     protected function loadCategories()
     {
 
-        $akeys = array_keys(\KurtJensen\Passage\Plugin::globalPassageKeys());
+        $akeys = array_keys(\KurtJensen\Passage\Plugin::passageKeys());
         $permarray = array_merge($akeys, [Settings::get('public_perm')]);
 
         $categories = BlogCategory::whereIn('permission_id', $permarray)->orderBy('name');
@@ -27,11 +27,11 @@ class ProtectedCategories extends Categories
         if (!$this->property('displayEmpty')) {
             $categories->whereExists(function ($query) {
                 $query->select(Db::raw(1))
-                ->from('rainlab_blog_posts_categories')
-                ->join('rainlab_blog_posts', 'rainlab_blog_posts.id', '=', 'rainlab_blog_posts_categories.post_id')
-                ->whereNotNull('rainlab_blog_posts.published')
-                ->where('rainlab_blog_posts.published', '=', 1)
-                ->whereRaw('rainlab_blog_categories.id = rainlab_blog_posts_categories.category_id');
+                    ->from('rainlab_blog_posts_categories')
+                    ->join('rainlab_blog_posts', 'rainlab_blog_posts.id', '=', 'rainlab_blog_posts_categories.post_id')
+                    ->whereNotNull('rainlab_blog_posts.published')
+                    ->where('rainlab_blog_posts.published', '=', 1)
+                    ->whereRaw('rainlab_blog_categories.id = rainlab_blog_posts_categories.category_id');
             });
         }
 

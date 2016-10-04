@@ -20,7 +20,7 @@ class ProtectedPost extends Post
 
         $slug = $this->property('slug');
 
-        $akeys = array_keys(\KurtJensen\Passage\Plugin::globalPassageKeys());
+        $akeys = array_keys(\KurtJensen\Passage\Plugin::passageKeys());
         $permarray = array_merge($akeys, [Settings::get('public_perm')]);
 
         $post = BlogPost::whereHas('categories',

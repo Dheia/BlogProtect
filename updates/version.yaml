@@ -16,3 +16,4 @@
 1.0.8: Added messageURL() to enable Author Notices
 1.0.9: Added Backend Settings Permissions
 1.0.10: Updated to changes made in Passage Permission Plugin
+1.0.11: Removed last trace of "deny_perm" and deleted unused trait

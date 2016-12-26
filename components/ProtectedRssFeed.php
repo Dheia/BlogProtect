@@ -1,17 +1,17 @@
 <?php namespace KurtJensen\BlogProtect\Components;
 
 use KurtJensen\BlogProtect\Models\Settings;
-use RainLab\Blog\Components\Posts;
+use RainLab\Blog\Components\RssFeed as RainRss;
 use RainLab\Blog\Models\Category as BlogCategory;
 use RainLab\Blog\Models\Post as BlogPost;
 
-class ProtectedPosts extends Posts {
+class ProtectedRssFeed extends RainRss {
 	public $permarray = [];
 
 	public function componentDetails() {
 		return [
-			'name' => 'kurtjensen.blogprotect::lang.posts.title',
-			'description' => 'kurtjensen.blogprotect::lang.posts.description',
+			'name' => 'kurtjensen.blogprotect::lang.rssfeed.title',
+			'description' => 'kurtjensen.blogprotect::lang.rssfeed.description',
 		];
 	}
 
@@ -21,20 +21,14 @@ class ProtectedPosts extends Posts {
 		/*
 			         * List all the posts, eager load their categories
 		*/
-
-		$posts = BlogPost::
-			with('categories')->
-			whereHas('categories', // Added to query to limit categories
+		$posts = BlogPost::whereHas('categories', // Added to query to limit categories
 			function ($q) {
 				$q->whereIn('permission_id', $this->permarray);
 			})->
-			listFrontEnd([
-			'page' => $this->property('pageNumber'),
+			with('categories')->listFrontEnd([
 			'sort' => $this->property('sortOrder'),
 			'perPage' => $this->property('postsPerPage'),
-			'search' => trim(input('search')),
 			'category' => $category,
-			'exceptPost' => $this->property('exceptPost'),
 		]);
 
 		/*
@@ -42,10 +36,6 @@ class ProtectedPosts extends Posts {
 		*/
 		$posts->each(function ($post) {
 			$post->setUrl($this->postPage, $this->controller);
-
-			$post->categories->each(function ($category) {
-				$category->setUrl($this->categoryPage, $this->controller);
-			});
 		});
 
 		return $posts;
@@ -56,20 +46,16 @@ class ProtectedPosts extends Posts {
 		$akeys = array_keys(\KurtJensen\Passage\Plugin::passageKeys());
 		$this->permarray = array_merge($akeys, [Settings::get('public_perm')]);
 
-		if (!$slug = $this->property('categoryFilter')) {
+		if (!$categoryId = $this->property('categoryFilter')) {
 			return null;
 		}
 
-		$category = new BlogCategory;
-
-		$category = $category->isClassExtendedWith('RainLab.Translate.Behaviors.TranslatableModel')
-		? $category->transWhere('slug', $slug)
-		: $category->where('slug', $slug);
-
-		$category = $category->
+		if (!$category = BlogCategory::whereSlug($categoryId)->
 			whereIn('permission_id', $this->permarray)->// Added to query to limit categories
-			first();
+			first()) {
+			return null;
+		}
 
-		return $category ?: null;
+		return $category;
 	}
 }

@@ -8,7 +8,7 @@ class ProtectedPost extends Post {
 
 	public function componentDetails() {
 		return [
-			'name' => 'kurtjensen.blogprotect::lang.post.title',
+			'name' => 'kurtjensen.blogprotect::lang.post.name',
 			'description' => 'kurtjensen.blogprotect::lang.post.description',
 		];
 	}

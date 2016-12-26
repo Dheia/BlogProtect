@@ -4,6 +4,7 @@ return [
 	'plugin' => [
 		'name' => 'BlogProtect',
 		'description' => 'Restrict RainLab Blog Post viewers by category permission',
+		'permission_label' => 'Change Blog Protect Settings',
 	],
 	'settings' => [
 		'label' => 'Blog Protect',
@@ -28,6 +29,11 @@ return [
 	'rssfeed' => [
 		'title' => 'Protected RSS Feed',
 		'description' => 'Generates an RSS feed containing protected posts from the blog.',
+	],
+
+	'added_columns' => [
+		'permission_id_label' => 'Permision',
+		'category_id_label' => 'ID',
 	],
 
 	'added_fields' => [

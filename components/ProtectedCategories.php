@@ -9,7 +9,7 @@ class ProtectedCategories extends Categories {
 
 	public function componentDetails() {
 		return [
-			'name' => 'kurtjensen.blogprotect::lang.categories.title',
+			'name' => 'kurtjensen.blogprotect::lang.categories.name',
 			'description' => 'kurtjensen.blogprotect::lang.categories.description',
 		];
 	}

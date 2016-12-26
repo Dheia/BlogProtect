@@ -3,6 +3,7 @@
 use Event;
 use KurtJensen\BlogProtect\Models\Settings;
 use KurtJensen\Passage\Models\Key;
+use Lang;
 use RainLab\Blog\Controllers\Categories as CategoryController;
 use RainLab\Blog\Models\Category as CategoryModel;
 use System\Classes\PluginBase;
@@ -36,16 +37,19 @@ class Plugin extends PluginBase {
 
 	public function registerPermissions() {
 		return [
-			'kurtjensen.blogprotect.settings' => ['label' => 'Blog Protect Settings', 'tab' => 'Blog'],
+			'kurtjensen.blogprotect.settings' => [
+				'label' => 'kurtjensen.blogprotect::lang.plugin.permission_label',
+				'tab' => 'rainlab.blog::lang.blog.tab',
+			],
 		];
 	}
 
 	public function registerSettings() {
 		return [
 			'settings' => [
-				'label' => 'kurtjensen.blogprotect.::lang.settings.label',
+				'label' => 'kurtjensen.blogprotect::lang.settings.label',
 				'icon' => 'icon-pencil',
-				'description' => 'kurtjensen.blogprotect.::lang.settings.description',
+				'description' => 'kurtjensen.blogprotect::lang.settings.description',
 				'class' => 'KurtJensen\BlogProtect\Models\Settings',
 				'order' => 199,
 				'permissions' => ['kurtjensen.blogprotect.settings'],
@@ -83,14 +87,14 @@ class Plugin extends PluginBase {
 
 			$widget->addColumns([
 				'permission_id' => [
-					'label' => 'Permission',
+					'label' => Lang::get('kurtjensen.blogprotect::lang.added_columns.permission_id_label'),
 					'relation' => 'permission',
 					'select' => 'concat(permission_id,\' \',kurtjensen_passage_keys.name)',
 					'type' => 'relation',
 					'searchable' => true,
 				],
 				'id' => [
-					'label' => 'ID',
+					'label' => Lang::get('kurtjensen.blogprotect::lang.added_columns.category_id_label'),
 					'searchable' => true,
 					'type' => 'Number',
 				],
@@ -109,8 +113,8 @@ class Plugin extends PluginBase {
 
 			$form->addFields([
 				'permission_id' => [
-					'label' => 'kurtjensen.blogprotect.::lang.added_fields.permission_id_label',
-					'comment' => 'kurtjensen.blogprotect.::lang.added_fields.permission_id_comment',
+					'label' => Lang::get('kurtjensen.blogprotect::lang.added_fields.permission_id_label'),
+					'comment' => Lang::get('kurtjensen.blogprotect::lang.added_fields.permission_id_comment'),
 					'type' => 'dropdown',
 					'options' => $this->getPermissonIdOptions(),
 					'default' => Settings::get('default_perm', 'blog_deny_all'),

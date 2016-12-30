@@ -24,8 +24,8 @@ class Plugin extends PluginBase {
 	 */
 	public function pluginDetails() {
 		return [
-			'name' => 'kurtjensen.blogprotect.::lang.plugin.name',
-			'description' => 'kurtjensen.blogprotect.::lang.plugin.description',
+			'name' => 'kurtjensen.blogprotect::lang.plugin.name',
+			'description' => 'kurtjensen.blogprotect::lang.plugin.description',
 			'author' => 'KurtJensen',
 			'icon' => 'icon-lock',
 		];

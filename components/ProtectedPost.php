@@ -17,7 +17,7 @@ class ProtectedPost extends Post {
 
 		$slug = $this->property('slug');
 
-		$akeys = array_keys(\KurtJensen\Passage\Plugin::passageKeys());
+		$akeys = array_keys(app('PassageService')::passageKeys());
 		$permarray = array_merge($akeys, [Settings::get('public_perm')]);
 
 		$post = new BlogPost;

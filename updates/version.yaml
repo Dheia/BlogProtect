@@ -19,3 +19,4 @@
 1.0.11: Removed last trace of "deny_perm" and deleted unused trait
 1.0.12: Updated to reflect changes made to RainLab Blog.  Add RSS feed.
 1.0.13: Fix Plugin language key for plugin name and description.
+1.0.14: 'Updated to changes made in Passage Permission Plugin up to version 1.0.12'

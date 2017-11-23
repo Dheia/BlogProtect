@@ -6,7 +6,7 @@ use RainLab\Blog\Models\Category as BlogCategory;
 use RainLab\Blog\Models\Post as BlogPost;
 
 class ProtectedPosts extends Posts {
-	public $permarray = [];
+	public $permarray = null;
 
 	public function componentDetails() {
 		return [
@@ -26,7 +26,7 @@ class ProtectedPosts extends Posts {
 			with('categories')->
 			whereHas('categories', // Added to query to limit categories
 			function ($q) {
-				$q->whereIn('permission_id', $this->permarray);
+				$q->whereIn('permission_id', $this->getPermissions());
 			})->
 			listFrontEnd([
 			'page' => $this->property('pageNumber'),
@@ -51,11 +51,16 @@ class ProtectedPosts extends Posts {
 		return $posts;
 	}
 
-	protected function loadCategory() {
-		// Load permissions
-		$akeys = array_keys(\KurtJensen\Passage\Plugin::passageKeys());
+	protected function getPermissions() {
+		if (!$this->permarray === null) {
+			return $this->permarray;
+		}
+		$akeys = array_keys(app('PassageService')::passageKeys());
 		$this->permarray = array_merge($akeys, [Settings::get('public_perm')]);
+		return $this->permarray;
+	}
 
+	protected function loadCategory() {
 		if (!$slug = $this->property('categoryFilter')) {
 			return null;
 		}
@@ -67,7 +72,7 @@ class ProtectedPosts extends Posts {
 		: $category->where('slug', $slug);
 
 		$category = $category->
-			whereIn('permission_id', $this->permarray)->// Added to query to limit categories
+			whereIn('permission_id', $this->getPermissions())->// Added to query to limit categories
 			first();
 
 		return $category ?: null;

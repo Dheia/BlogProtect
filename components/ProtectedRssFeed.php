@@ -43,7 +43,7 @@ class ProtectedRssFeed extends RainRss {
 
 	protected function loadCategory() {
 		// Load permissions
-		$akeys = array_keys(\KurtJensen\Passage\Plugin::passageKeys());
+		$akeys = array_keys(app('PassageService')::passageKeys());
 		$this->permarray = array_merge($akeys, [Settings::get('public_perm')]);
 
 		if (!$categoryId = $this->property('categoryFilter')) {

@@ -6,6 +6,7 @@ use RainLab\Blog\Components\Categories;
 use RainLab\Blog\Models\Category as BlogCategory;
 
 class ProtectedCategories extends Categories {
+	public $permarray = null;
 
 	public function componentDetails() {
 		return [
@@ -14,12 +15,17 @@ class ProtectedCategories extends Categories {
 		];
 	}
 
+	protected function getPermissions() {
+		if ($this->permarray === null) {
+			$akeys = array_keys(app('PassageService')::passageKeys());
+			$this->permarray = array_merge($akeys, [Settings::get('public_perm')]);
+		}
+		return $this->permarray;
+	}
+
 	protected function loadCategories() {
 
-		$akeys = array_keys(\KurtJensen\Passage\Plugin::passageKeys());
-		$permarray = array_merge($akeys, [Settings::get('public_perm')]);
-
-		$categories = BlogCategory::whereIn('permission_id', $permarray)->orderBy('name');
+		$categories = BlogCategory::whereIn('permission_id', $this->getPermissions())->orderBy('name');
 
 		if (!$this->property('displayEmpty')) {
 			$categories->whereExists(function ($query) {

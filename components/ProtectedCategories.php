@@ -46,4 +46,22 @@ class ProtectedCategories extends Categories {
 		*/
 		return $this->linkCategories($categories);
 	}
+
+	protected function linkCategories($categories) {
+		$blogPostsComponent = $this->getComponent('PblogPosts', $this->categoryPage);
+
+		return $categories->each(function ($category) use ($blogPostsComponent) {
+			$category->setUrl(
+				$this->categoryPage,
+				$this->controller,
+				[
+					'slug' => $this->urlProperty($blogPostsComponent, 'categoryFilter'),
+				]
+			);
+
+			if ($category->children) {
+				$this->linkCategories($category->children);
+			}
+		});
+	}
 }

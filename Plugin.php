@@ -90,7 +90,6 @@ class Plugin extends PluginBase {
 					'label' => Lang::get('kurtjensen.blogprotect::lang.added_columns.permission_id_label'),
 					'relation' => 'permission',
 					'select' => 'concat(permission_id,\' \',kurtjensen_passage_keys.name)',
-					'type' => 'relation',
 					'searchable' => true,
 				],
 				'id' => [

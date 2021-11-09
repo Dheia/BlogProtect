@@ -1,6 +1,6 @@
-<?php namespace KurtJensen\BlogProtect\Models;
+<?php namespace Asped\BlogProtect\Models;
 
-use KurtJensen\Passage\Models\Key;
+use JosephCrowell\Passage\Models\Key;
 use Model;
 
 /**
@@ -14,7 +14,7 @@ class Settings extends Model
 
     public $implement = ['System.Behaviors.SettingsModel'];
 
-    public $settingsCode = 'kurtjensen_blogprotect_settings';
+    public $settingsCode = 'asped_blogprotect_settings';
 
     public $settingsFields = 'fields.yaml';
 
@@ -30,7 +30,7 @@ class Settings extends Model
      * @var array Relations
      */
     public $belongsTo = [
-        'permission' => ['KurtJensen\Passage\Models\Key',
+        'permission' => ['JosephCrowell\Passage\Models\Key',
             'otherKey' => 'id'],
     ];
 

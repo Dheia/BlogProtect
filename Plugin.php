@@ -1,11 +1,11 @@
-<?php namespace KurtJensen\BlogProtect;
+<?php namespace Asped\BlogProtect;
 
 use Event;
-use KurtJensen\BlogProtect\Models\Settings;
-use KurtJensen\Passage\Models\Key;
+use Asped\BlogProtect\Models\Settings;
+use JosephCrowell\Passage\Models\Key;
 use Lang;
-use RainLab\Blog\Controllers\Categories as CategoryController;
-use RainLab\Blog\Models\Category as CategoryModel;
+use Winter\Blog\Controllers\Categories as CategoryController;
+use Winter\Blog\Models\Category as CategoryModel;
 use System\Classes\PluginBase;
 
 /**
@@ -15,7 +15,7 @@ class Plugin extends PluginBase {
 	/**
 	 * @var array Plugin dependencies
 	 */
-	public $require = ['RainLab.User', 'RainLab.Blog', 'KurtJensen.Passage'];
+	public $require = ['Winter.User', 'Winter.Blog', 'JosephCrowell.Passage'];
 
 	/**
 	 * Returns information about this plugin.
@@ -24,9 +24,9 @@ class Plugin extends PluginBase {
 	 */
 	public function pluginDetails() {
 		return [
-			'name' => 'kurtjensen.blogprotect::lang.plugin.name',
-			'description' => 'kurtjensen.blogprotect::lang.plugin.description',
-			'author' => 'KurtJensen',
+			'name' => 'asped.blogprotect::lang.plugin.name',
+			'description' => 'asped.blogprotect::lang.plugin.description',
+			'author' => 'Asped',
 			'icon' => 'icon-lock',
 		];
 	}
@@ -37,9 +37,9 @@ class Plugin extends PluginBase {
 
 	public function registerPermissions() {
 		return [
-			'kurtjensen.blogprotect.settings' => [
-				'label' => 'kurtjensen.blogprotect::lang.plugin.permission_label',
-				'tab' => 'rainlab.blog::lang.blog.tab',
+			'asped.blogprotect.settings' => [
+				'label' => 'asped.blogprotect::lang.plugin.permission_label',
+				'tab' => 'winter.blog::lang.blog.tab',
 			],
 		];
 	}
@@ -47,12 +47,12 @@ class Plugin extends PluginBase {
 	public function registerSettings() {
 		return [
 			'settings' => [
-				'label' => 'kurtjensen.blogprotect::lang.settings.label',
+				'label' => 'asped.blogprotect::lang.settings.label',
 				'icon' => 'icon-pencil',
-				'description' => 'kurtjensen.blogprotect::lang.settings.description',
-				'class' => 'KurtJensen\BlogProtect\Models\Settings',
+				'description' => 'asped.blogprotect::lang.settings.description',
+				'class' => 'Asped\BlogProtect\Models\Settings',
 				'order' => 199,
-				'permissions' => ['kurtjensen.blogprotect.settings'],
+				'permissions' => ['asped.blogprotect.settings'],
 			],
 		];
 
@@ -60,40 +60,40 @@ class Plugin extends PluginBase {
 
 	public function registerComponents() {
 		return [
-			'KurtJensen\BlogProtect\Components\ProtectedPost' => 'PblogPost',
-			'KurtJensen\BlogProtect\Components\ProtectedPosts' => 'PblogPosts',
-			'KurtJensen\BlogProtect\Components\ProtectedCategories' => 'PblogCategories',
-			'KurtJensen\BlogProtect\Components\ProtectedRssFeed' => 'PblogRssFeed',
+			'Asped\BlogProtect\Components\ProtectedPost' => 'PblogPost',
+			'Asped\BlogProtect\Components\ProtectedPosts' => 'PblogPosts',
+			'Asped\BlogProtect\Components\ProtectedCategories' => 'PblogCategories',
+			'Asped\BlogProtect\Components\ProtectedRssFeed' => 'PblogRssFeed',
 		];
 	}
 
 	public function boot() {
 		CategoryModel::extend(function ($model) {
-			$model->belongsTo['permission'] = ['KurtJensen\Passage\Models\Key',
-				'table' => 'kurtjensen_passage_keys',
+			$model->belongsTo['permission'] = ['JosephCrowell\Passage\Models\Key',
+				'table' => 'asped_passage_keys',
 				'key' => 'permission_id',
 			];
 
 		});
 
 		Event::listen('backend.list.extendColumns', function ($widget) {
-			if (!$widget->getController() instanceof \RainLab\Blog\Controllers\Categories) {
+			if (!$widget->getController() instanceof \Winter\Blog\Controllers\Categories) {
 				return;
 			}
 
-			if (!$widget->model instanceof \RainLab\Blog\Models\Category) {
+			if (!$widget->model instanceof \Winter\Blog\Models\Category) {
 				return;
 			}
 
 			$widget->addColumns([
 				'permission_id' => [
-					'label' => Lang::get('kurtjensen.blogprotect::lang.added_columns.permission_id_label'),
+					'label' => Lang::get('asped.blogprotect::lang.added_columns.permission_id_label'),
 					'relation' => 'permission',
-					'select' => 'concat(permission_id,\' \',kurtjensen_passage_keys.name)',
+					'select' => 'concat(permission_id,\' \',josephcrowel_passage_keys.name)',
 					'searchable' => true,
 				],
 				'id' => [
-					'label' => Lang::get('kurtjensen.blogprotect::lang.added_columns.category_id_label'),
+					'label' => Lang::get('asped.blogprotect::lang.added_columns.category_id_label'),
 					'searchable' => true,
 					'type' => 'Number',
 				],
@@ -112,8 +112,8 @@ class Plugin extends PluginBase {
 
 			$form->addFields([
 				'permission_id' => [
-					'label' => Lang::get('kurtjensen.blogprotect::lang.added_fields.permission_id_label'),
-					'comment' => Lang::get('kurtjensen.blogprotect::lang.added_fields.permission_id_comment'),
+					'label' => Lang::get('asped.blogprotect::lang.added_fields.permission_id_label'),
+					'comment' => Lang::get('asped.blogprotect::lang.added_fields.permission_id_comment'),
 					'type' => 'dropdown',
 					'options' => $this->getPermissonIdOptions(),
 					'default' => Settings::get('default_perm', 'blog_deny_all'),

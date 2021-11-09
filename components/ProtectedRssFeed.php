@@ -1,17 +1,17 @@
-<?php namespace KurtJensen\BlogProtect\Components;
+<?php namespace Asped\BlogProtect\Components;
 
-use KurtJensen\BlogProtect\Models\Settings;
-use RainLab\Blog\Components\RssFeed as RainRss;
-use RainLab\Blog\Models\Category as BlogCategory;
-use RainLab\Blog\Models\Post as BlogPost;
+use Asped\BlogProtect\Models\Settings;
+use Winter\Blog\Components\RssFeed as RainRss;
+use Winter\Blog\Models\Category as BlogCategory;
+use Winter\Blog\Models\Post as BlogPost;
 
 class ProtectedRssFeed extends RainRss {
 	public $permarray = [];
 
 	public function componentDetails() {
 		return [
-			'name' => 'kurtjensen.blogprotect::lang.rssfeed.title',
-			'description' => 'kurtjensen.blogprotect::lang.rssfeed.description',
+			'name' => 'asped.blogprotect::lang.rssfeed.title',
+			'description' => 'asped.blogprotect::lang.rssfeed.description',
 		];
 	}
 

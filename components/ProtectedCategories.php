@@ -1,17 +1,17 @@
-<?php namespace KurtJensen\BlogProtect\Components;
+<?php namespace Asped\BlogProtect\Components;
 
 use Db;
-use KurtJensen\BlogProtect\Models\Settings;
-use RainLab\Blog\Components\Categories;
-use RainLab\Blog\Models\Category as BlogCategory;
+use Asped\BlogProtect\Models\Settings;
+use Winter\Blog\Components\Categories;
+use Winter\Blog\Models\Category as BlogCategory;
 
 class ProtectedCategories extends Categories {
 	public $permarray = null;
 
 	public function componentDetails() {
 		return [
-			'name' => 'kurtjensen.blogprotect::lang.categories.name',
-			'description' => 'kurtjensen.blogprotect::lang.categories.description',
+			'name' => 'asped.blogprotect::lang.categories.name',
+			'description' => 'asped.blogprotect::lang.categories.description',
 		];
 	}
 
@@ -31,11 +31,11 @@ class ProtectedCategories extends Categories {
 			$categories->whereExists(function ($query) {
 				$prefix = Db::getTablePrefix();
 				$query->select(Db::raw(1))
-					->from('rainlab_blog_posts_categories')
-					->join('rainlab_blog_posts', 'rainlab_blog_posts.id', '=', 'rainlab_blog_posts_categories.post_id')
-					->whereNotNull('rainlab_blog_posts.published')
-					->where('rainlab_blog_posts.published', '=', 1)
-					->whereRaw($prefix . 'rainlab_blog_categories.id = ' . $prefix . 'rainlab_blog_posts_categories.category_id');
+					->from('winter_blog_posts_categories')
+					->join('winter_blog_posts', 'winter_blog_posts.id', '=', 'winter_blog_posts_categories.post_id')
+					->whereNotNull('winter_blog_posts.published')
+					->where('winter_blog_posts.published', '=', 1)
+					->whereRaw($prefix . 'winter_blog_categories.id = ' . $prefix . 'winter_blog_posts_categories.category_id');
 			});
 		}
 

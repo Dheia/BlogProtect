@@ -3,7 +3,7 @@
 return [
 	'plugin' => [
 		'name' => 'BlogProtect',
-		'description' => 'Restrict RainLab Blog Post viewers by category permission',
+		'description' => 'Restrict Winter Blog Post viewers by category permission',
 		'permission_label' => 'Change Blog Protect Settings',
 	],
 	'settings' => [

@@ -1,17 +1,17 @@
-<?php namespace KurtJensen\BlogProtect\Components;
+<?php namespace Asped\BlogProtect\Components;
 
-use KurtJensen\BlogProtect\Models\Settings;
-use RainLab\Blog\Components\Posts;
-use RainLab\Blog\Models\Category as BlogCategory;
-use RainLab\Blog\Models\Post as BlogPost;
+use Asped\BlogProtect\Models\Settings;
+use Winter\Blog\Components\Posts;
+use Winter\Blog\Models\Category as BlogCategory;
+use Winter\Blog\Models\Post as BlogPost;
 
 class ProtectedPosts extends Posts {
 	public $permarray = null;
 
 	public function componentDetails() {
 		return [
-			'name' => 'kurtjensen.blogprotect::lang.posts.name',
-			'description' => 'kurtjensen.blogprotect::lang.posts.description',
+			'name' => 'asped.blogprotect::lang.posts.name',
+			'description' => 'asped.blogprotect::lang.posts.description',
 		];
 	}
 
@@ -67,7 +67,7 @@ class ProtectedPosts extends Posts {
 
 		$category = new BlogCategory;
 
-		$category = $category->isClassExtendedWith('RainLab.Translate.Behaviors.TranslatableModel')
+		$category = $category->isClassExtendedWith('Winter.Translate.Behaviors.TranslatableModel')
 		? $category->transWhere('slug', $slug)
 		: $category->where('slug', $slug);
 

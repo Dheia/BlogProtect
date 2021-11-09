@@ -1,6 +1,6 @@
-<?php namespace KurtJensen\BlogProtect\Updates;
+<?php namespace Asped\BlogProtect\Updates;
 
-use KurtJensen\Passage\Models\Key;
+use JosephCrowell\Passage\Models\Key;
 use October\Rain\Database\Updates\Seeder;
 
 class SeedAllTables extends Seeder

@@ -1,4 +1,4 @@
-<?php namespace KurtJensen\BlogProtect\Updates;
+<?php namespace Asped\BlogProtect\Updates;
 
 use Schema;
 use October\Rain\Database\Updates\Migration;
@@ -8,7 +8,7 @@ class CreateSettingsTable extends Migration
 
     public function up()
     {
-        Schema::create('kurtjensen_blogprotect_settings', function($table)
+        Schema::create('asped_blogprotect_settings', function($table)
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
@@ -18,7 +18,7 @@ class CreateSettingsTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('kurtjensen_blogprotect_settings');
+        Schema::dropIfExists('asped_blogprotect_settings');
     }
 
 }

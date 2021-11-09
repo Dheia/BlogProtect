@@ -1,15 +1,15 @@
-<?php namespace KurtJensen\BlogProtect\Components;
+<?php namespace Asped\BlogProtect\Components;
 
-use KurtJensen\BlogProtect\Models\Settings;
-use RainLab\Blog\Components\Post;
-use RainLab\Blog\Models\Post as BlogPost;
+use Asped\BlogProtect\Models\Settings;
+use Winter\Blog\Components\Post;
+use Winter\Blog\Models\Post as BlogPost;
 
 class ProtectedPost extends Post {
 
 	public function componentDetails() {
 		return [
-			'name' => 'kurtjensen.blogprotect::lang.post.name',
-			'description' => 'kurtjensen.blogprotect::lang.post.description',
+			'name' => 'asped.blogprotect::lang.post.name',
+			'description' => 'asped.blogprotect::lang.post.description',
 		];
 	}
 
@@ -22,7 +22,7 @@ class ProtectedPost extends Post {
 
 		$post = new BlogPost;
 
-		$post = $post->isClassExtendedWith('RainLab.Translate.Behaviors.TranslatableModel')
+		$post = $post->isClassExtendedWith('Winter.Translate.Behaviors.TranslatableModel')
 		? $post->transWhere('slug', $slug)
 		: $post->where('slug', $slug);
 

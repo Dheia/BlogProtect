@@ -1,0 +1,48 @@
+{
+    "name": "asped/wn-blogprotect-plugin",
+    "type": "winter-plugin",
+    "description": "Adds permissions to the blog posts",
+    "keywords": [
+        "winter",
+        "cms",
+        "wintercms",
+        "user",
+        "authentication",
+        "permission",
+        "passage",
+        "key",
+        "blog",
+        "group"
+    ],
+    "homepage": "https://github.com/asped/BlogProtect",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Kurt Jensen",
+            "email": "kjensen@iaff106.com",
+            "homepage": "https://firemankurt.com",
+            "role": "Original Author"
+        },
+        {
+            "name": "Asped",
+            "email": "aasped@gmail.com",
+            "homepage": "https://github.com/asped/BlogProtect",
+            "role": "Author"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Asped\\BlogProtect\\": ""
+        }
+    },
+    "require": {
+        "php": ">=7.0",
+        "composer/installers": "~1.0",
+        "winter/wn-user-plugin": "^2.0",
+        "winter/wn-location-plugin": "^2.0",
+        "winter/wn-notify-plugin": "^2.0",
+        "josephcrowell/wn-passage-plugin": "^1.3.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
